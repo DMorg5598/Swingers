@@ -1,0 +1,33 @@
+---
+title: "Rookie Report Generator"
+output: html_notebook
+---
+
+```{r}
+library(knitr)
+library(ggplot2)
+library(rmarkdown)
+library(dplyr)
+library(tinytex)
+library(lubridate)
+
+rookieroster <- read.csv('rookies.csv')
+
+playernames <- unique(rookieroster$'Name')
+
+# Loop over each player name and generate a report
+for (playername in playernames) {
+  # Subset the data to include only the current player
+  playerdata <- rookieroster%>% filter(Name == playername)
+  name <- playerdata[[2]]
+  personalinfo <- playerdata %>% select(Year, Name, Age, Tm, Lg, Aff)
+  basic <- playerdata %>% select(ERA, IP, H, R)
+  winloss <- playerdata %>% select(W, L, W.L.)
+  performance <- playerdata %>% select(!c(Year, Name, Age, Tm, Lg, Aff, W, L, W.L., ERA, IP, H, R))
+  
+  # Write the plot and player data to a report
+  file_name <- paste0(name, ".pdf")
+  render(input = "RookieReportTemplate.Rmd", output_format="pdf_document", output_file = file_name, output_dir='C:/directory/outputs', envir = new.env(parent =   globalenv()), run_pandoc = TRUE)
+}
+```
+
