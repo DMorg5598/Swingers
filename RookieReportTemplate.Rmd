@@ -1,0 +1,28 @@
+---
+title: "Marion Mets Performance Report"
+output: html_notebook
+---
+
+**Player Information**
+
+```{r,echo=FALSE, tidy='formatR', comment='', highlight=FALSE}
+knitr::kable(personalinfo)
+```
+
+**Player Win/Loss**
+
+```{r,echo=FALSE, tidy='formatR', comment='', highlight=FALSE}
+knitr::kable(winloss)
+```
+
+**Basic Stats**
+
+```{r,echo=FALSE, tidy='formatR', comment='', highlight=FALSE}
+knitr::kable(basic)
+```
+
+**Player Performance**
+
+```{r,echo=FALSE, tidy='formatR', comment='', highlight=FALSE}
+knitr::kable(performance)
+```
